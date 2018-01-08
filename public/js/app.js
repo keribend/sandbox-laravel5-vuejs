@@ -60862,6 +60862,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60869,6 +60895,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       e1: 0,
       age: 0,
       drivingLicenseOwned: false,
+      drivetrain: "FWD",
+      drivetrains: ["FWD", "RWD"],
+      drifting: false,
       genders: ["F", "M", "Other"],
       gender: "M"
     };
@@ -61137,10 +61166,107 @@ var render = function() {
             "v-stepper-content",
             { attrs: { step: "3" } },
             [
-              _c("v-card", {
-                staticClass: "mb-5",
-                attrs: { with: "400px", height: "400px" }
-              }),
+              _c(
+                "v-card",
+                {
+                  staticClass: "mb-5",
+                  attrs: { with: "400px", height: "400px" }
+                },
+                [
+                  _c(
+                    "v-container",
+                    { attrs: { fluid: "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "", wrap: "", "align-center": "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c("v-subheader", [
+                                _vm._v("Which drivetrain do you prefer?")
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-radio-group",
+                        {
+                          attrs: { mandatory: true, row: "" },
+                          model: {
+                            value: _vm.drivetrain,
+                            callback: function($$v) {
+                              _vm.drivetrain = $$v
+                            },
+                            expression: "drivetrain"
+                          }
+                        },
+                        [
+                          _c("v-radio", {
+                            attrs: { label: "FWD", value: "FWD" }
+                          }),
+                          _vm._v(" "),
+                          _c("v-radio", {
+                            attrs: { label: "RWD", value: "RWD" }
+                          }),
+                          _vm._v(" "),
+                          _c("v-radio", {
+                            attrs: { label: "I don't know", default: "" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "", wrap: "", "align-center": "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs8: "" } },
+                            [
+                              _c("v-subheader", [
+                                _vm._v("Do you care about drifting?")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs4: "" } },
+                            [
+                              _c("v-checkbox", {
+                                attrs: {
+                                  label: "" + (_vm.drifting ? "Yes" : "No"),
+                                  "hide-details": ""
+                                },
+                                model: {
+                                  value: _vm.drifting,
+                                  callback: function($$v) {
+                                    _vm.drifting = $$v
+                                  },
+                                  expression: "drifting"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
                 "v-btn",

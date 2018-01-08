@@ -76,8 +76,9 @@
               </v-flex>
             </v-layout>
             <v-radio-group v-model="drivetrain" :mandatory="true" row>
-              <v-radio label="Radio 1" value="radio-1"></v-radio>
-              <v-radio label="Radio 2" value="radio-2"></v-radio>
+              <v-radio label="FWD" value="FWD"></v-radio>
+              <v-radio label="RWD" value="RWD"></v-radio>
+              <v-radio label="I don't know" default></v-radio>
             </v-radio-group>
             <v-layout row wrap align-center>
               <v-flex xs8>
@@ -85,12 +86,13 @@
               </v-flex>
               <v-flex xs4>
                 <v-checkbox
-                  v-bind:label="`${(drivingLicenseOwned) ? 'Yes' : 'No' }`"
-                  v-model="drivingLicenseOwned"
+                  v-bind:label="`${(drifting) ? 'Yes' : 'No' }`"
+                  v-model="drifting"
                   hide-details
                 ></v-checkbox>
               </v-flex>
             </v-layout>
+
           </v-container>
         </v-card>
         <v-btn color="primary" @click.native="e1 = 4">Continue</v-btn>
@@ -111,7 +113,8 @@
         age: 0,
         drivingLicenseOwned: false,
         drivetrain: "FWD",
-        drivetrains: ["FWD", "RWD", "I don't know"],
+        drivetrains: ["FWD", "RWD"],
+        drifting: false,
         genders: ["F", "M","Other"],
         gender: "M"
       }
