@@ -51,20 +51,48 @@
       <v-stepper-content step="2">
         <v-card class="mb-5" with="400px" height="400px">
           <v-container fluid>
-            <v-layout row>
+            <v-layout row wrap align-center>
               <v-flex xs8>
                 <v-subheader>Do you own a car driving license?</v-subheader>
               </v-flex>
               <v-flex xs4>
-                <v-checkbox v-bind:label="`(drivingLicenseOwned) ? Yes : No ;`" v-model="drivingLicenseOwned"></v-checkbox>
+                <v-checkbox
+                  v-bind:label="`${(drivingLicenseOwned) ? 'Yes' : 'No' }`"
+                  v-model="drivingLicenseOwned"
+                  hide-details
+                ></v-checkbox>
               </v-flex>
             </v-layout>
           </v-container>
         </v-card>
-        <v-btn color="primary" @click.native="e1 = 3">Continue</v-btn>
+        <v-btn color="primary" @click.native="checkStep2">Continue</v-btn>
       </v-stepper-content>
       <v-stepper-content step="3">
-        <v-card class="mb-5" with="400px" height="400px"></v-card>
+        <v-card class="mb-5" with="400px" height="400px">
+          <v-container fluid>
+            <v-layout row wrap align-center>
+              <v-flex xs12>
+                <v-subheader>Which drivetrain do you prefer?</v-subheader>
+              </v-flex>
+            </v-layout>
+            <v-radio-group v-model="drivetrain" :mandatory="true" row>
+              <v-radio label="Radio 1" value="radio-1"></v-radio>
+              <v-radio label="Radio 2" value="radio-2"></v-radio>
+            </v-radio-group>
+            <v-layout row wrap align-center>
+              <v-flex xs8>
+                <v-subheader>Do you care about drifting?</v-subheader>
+              </v-flex>
+              <v-flex xs4>
+                <v-checkbox
+                  v-bind:label="`${(drivingLicenseOwned) ? 'Yes' : 'No' }`"
+                  v-model="drivingLicenseOwned"
+                  hide-details
+                ></v-checkbox>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card>
         <v-btn color="primary" @click.native="e1 = 4">Continue</v-btn>
       </v-stepper-content>
       <v-stepper-content step="4">
@@ -82,13 +110,10 @@
         e1: 0,
         age: 0,
         drivingLicenseOwned: false,
+        drivetrain: "FWD",
+        drivetrains: ["FWD", "RWD", "I don't know"],
         genders: ["F", "M","Other"],
         gender: "M"
-      }
-    },
-    computed: {
-      drivingLicenseLabel () {
-        return (this.drivingLicenseOwned) ? 'Yes' : 'No' ;
       }
     },
     methods: {
@@ -97,6 +122,13 @@
           this.e1 = 4
         } else {
           this.e1 = 2
+        }
+      },
+      checkStep2: function () {
+        if (!this.drivingLicenseOwned) {
+          this.e1 = 4
+        } else {
+          this.e1 = 3
         }
       }
     }

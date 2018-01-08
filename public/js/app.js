@@ -60858,6 +60858,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60870,17 +60874,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
-  computed: {
-    drivingLicenseLabel: function drivingLicenseLabel() {
-      return this.drivingLicenseOwned ? 'Yes' : 'No';
-    }
-  },
   methods: {
     checkStep1: function checkStep1() {
       if (this.age < 18) {
         this.e1 = 4;
       } else {
         this.e1 = 2;
+      }
+    },
+    checkStep2: function checkStep2() {
+      if (!this.drivingLicenseOwned) {
+        this.e1 = 4;
+      } else {
+        this.e1 = 3;
       }
     }
   }
@@ -61066,7 +61072,7 @@ var render = function() {
                     [
                       _c(
                         "v-layout",
-                        { attrs: { row: "" } },
+                        { attrs: { row: "", wrap: "", "align-center": "" } },
                         [
                           _c(
                             "v-flex",
@@ -61085,7 +61091,10 @@ var render = function() {
                             [
                               _c("v-checkbox", {
                                 attrs: {
-                                  label: "(drivingLicenseOwned) ? Yes : No ;"
+                                  label:
+                                    "" +
+                                    (_vm.drivingLicenseOwned ? "Yes" : "No"),
+                                  "hide-details": ""
                                 },
                                 model: {
                                   value: _vm.drivingLicenseOwned,
@@ -61114,7 +61123,7 @@ var render = function() {
                   attrs: { color: "primary" },
                   nativeOn: {
                     click: function($event) {
-                      _vm.e1 = 3
+                      _vm.checkStep2($event)
                     }
                   }
                 },
