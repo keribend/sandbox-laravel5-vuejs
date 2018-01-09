@@ -23,6 +23,8 @@ Route::group([ 'prefix' => 'pollingexecutions' ], function() {
 		Route::get('bullet2', 'PollingExecutionController@bullet2');
 		Route::get('bullet3', 'PollingExecutionController@bullet3');
 		Route::get('bullet4', 'PollingExecutionController@bullet4');
+		Route::get('bullet5', 'PollingExecutionController@bullet5');
+		Route::get('bullet6', 'PollingExecutionController@bullet6');
 	});
 });
 

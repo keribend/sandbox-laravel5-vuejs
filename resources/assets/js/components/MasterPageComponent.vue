@@ -47,6 +47,26 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile to="/statistics4" @click="">
+          <v-list-tile-action>
+            <v-icon>show_chart</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              Statistics 4
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile to="/statistics6" @click="">
+          <v-list-tile-action>
+            <v-icon>show_chart</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              Statistics 5-6
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left>

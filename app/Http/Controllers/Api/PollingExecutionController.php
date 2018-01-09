@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\PollingExecution;
+use App\Car;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class PollingExecutionController extends Controller
@@ -30,7 +32,7 @@ class PollingExecutionController extends Controller
         if ($input['cars']) {
             foreach ($input['cars'] as $rawCar) {
                 $car = new \App\Car();
-                $car->fill([ 'model' => $rawCar['name'] ]);
+                $car->fill([ 'model' => Str::upper($rawCar['name']) ]);
                 if ($car->isValid()) {
                     $carsToSave[] = $car;
                 }
@@ -114,6 +116,63 @@ class PollingExecutionController extends Controller
             ],
         ];
         
+        return response()->json([
+            'status' => true,
+            'data' => $json_data,
+        ]);
+    }
+
+    public function bullet4() {
+        $pollings = PollingExecution::where('drivingLicenseOwned', true)->get();
+
+        $drivetrain = $pollings->filter(function($polling) {
+            return $polling->drivetrain == "FWD" or is_null($polling->drivetrain);
+        });
+
+        $json_data = [
+            [
+                "label" => "FWD or I don't know",
+                "data" => [$drivetrain->count()]
+            ],
+            [
+                "label" => "Others",
+                "data" => [$pollings->count() - $drivetrain->count()]
+            ],
+        ];
+
+        return response()->json([
+            'status' => true,
+            'data' => $json_data,
+        ]);
+    }
+
+    public function bullet5() {
+        $cars = Car::groupBy('polling_execution_id')
+            ->select(DB::raw('COUNT(id) as counter'))
+            ->get();
+
+        $avgCars = $cars->avg('counter');
+
+        return response()->json([
+            'status' => true,
+            'average' => $avgCars,
+        ]);
+    }
+
+    public function bullet6() {
+        $cars = DB::table('cars')
+            ->select('model', DB::raw('count(id) as Quantity'))
+            ->groupBy('model')
+            ->get();
+
+        $json_data = [];
+        foreach ($cars as $car) {
+            $json_data[] = [
+                "label" => $car->model,
+                "data" => [$car->Quantity],
+            ];
+        }
+
         return response()->json([
             'status' => true,
             'data' => $json_data,
