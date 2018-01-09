@@ -1,13 +1,15 @@
 <template>
-  <v-stepper v-model="e1">
+  <v-stepper v-model="step">
     <v-stepper-header>
-      <v-stepper-step step="1" :complete="e1 > 1">Generics</v-stepper-step>
+      <v-stepper-step step="1" :complete="step > 1">Generics</v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step step="2" :complete="e1 > 2">Driving license</v-stepper-step>
+      <v-stepper-step step="2" :complete="step > 2">License</v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step step="3" :complete="e1 > 3">Driving experience</v-stepper-step>
+      <v-stepper-step step="3" :complete="step > 3">Interests</v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step step="4">Summary</v-stepper-step>
+      <v-stepper-step step="4" :complete="step > 4">Experiences</v-stepper-step>
+      <v-divider></v-divider>
+      <v-stepper-step step="5">Summary</v-stepper-step>
     </v-stepper-header>
     <v-stepper-items>
       <v-stepper-content step="1">
@@ -19,7 +21,6 @@
               </v-flex>
               <v-flex xs8>
                 <v-text-field
-                  name="input-1-3"
                   label="Age"
                   v-model="age"
                   :min="0"
@@ -92,14 +93,48 @@
                 ></v-checkbox>
               </v-flex>
             </v-layout>
-
           </v-container>
         </v-card>
-        <v-btn color="primary" @click.native="e1 = 4">Continue</v-btn>
+        <v-btn color="primary" @click.native="step = 4">Continue</v-btn>
       </v-stepper-content>
       <v-stepper-content step="4">
+        <v-card class="mb-5" with="400px" height="400px">
+          <v-container fluid>
+            <v-layout row wrap align-center>
+              <v-flex xs12>
+                <v-subheader>Insert model names you have driven:</v-subheader>
+              </v-flex>
+            </v-layout>
+            <v-layout row wrap align-center>
+              <v-flex xs10>
+                <v-text-field
+                  v-model="newCar"
+                  :rules="[ carNameValidateCheck || !carNameExistCheck ]"
+                  label="Inser a BMW model name"
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs2>
+                <v-btn color="primary" @click="addCar">+</v-btn>
+              </v-flex>
+            </v-layout>
+            <v-layout row wrap align-center>
+              <v-flex xs12>
+                <v-list>
+                  <v-list-tile avatar v-for="car in cars" v-bind:key="car.name" @click="">
+                    <v-list-tile-content>
+                      <v-list-tile-title v-text="car.name"></v-list-tile-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </v-list>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card>
+        <v-btn color="primary" @click.native="step = 5">Continue</v-btn>
+      </v-stepper-content>
+      <v-stepper-content step="5">
         <v-card class="mb-5" with="400px" height="400px"></v-card>
-        <v-btn color="primary" @click.native="e1 = 4">Send</v-btn>
+        <v-btn color="primary" @click.native="step = 5">Send</v-btn>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
@@ -109,29 +144,50 @@
   export default {
     data () {
       return {
-        e1: 0,
+        step: 0,
         age: 0,
         drivingLicenseOwned: false,
         drivetrain: "FWD",
         drivetrains: ["FWD", "RWD"],
         drifting: false,
         genders: ["F", "M","Other"],
-        gender: "M"
+        gender: "M",
+        cars: [],
+        newCar: '',
+        carNamePattern: /^(M?[0-9]{3}(d|i)?)$|(^(X|Z)[0-9]$)/i
       }
     },
     methods: {
       checkStep1: function () {
         if (this.age < 18) {
-          this.e1 = 4
+          this.step = 5
         } else {
-          this.e1 = 2
+          this.step = 2
         }
       },
       checkStep2: function () {
         if (!this.drivingLicenseOwned) {
-          this.e1 = 4
+          this.step = 5
         } else {
-          this.e1 = 3
+          this.step = 3
+        }
+      },
+      carNameValidateCheck: function () {
+        if (!this.newCar.match(this.carNamePattern)) {
+          return ['Model name is incorrect.']
+        }
+        return ['']
+      },
+      carNameExistCheck: function (newCar) {
+        if (this.cars.some(function (car) { return car.name == newCar })) {
+          return ['Model name already present.']
+        }
+        return ['']
+      },
+      addCar: function () {
+        if (this.carNameValidateCheck() && !this.carNameExistCheck(this.newCar)) {
+          this.cars.push({name: this.newCar})
+          this.newCar = ''
         }
       }
     }

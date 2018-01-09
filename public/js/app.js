@@ -60888,34 +60888,92 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      e1: 0,
+      step: 0,
       age: 0,
       drivingLicenseOwned: false,
       drivetrain: "FWD",
       drivetrains: ["FWD", "RWD"],
       drifting: false,
       genders: ["F", "M", "Other"],
-      gender: "M"
+      gender: "M",
+      cars: [],
+      newCar: '',
+      carNamePattern: /^(M?[0-9]{3}(d|i)?)$|(^(X|Z)[0-9]$)/i
     };
   },
 
   methods: {
     checkStep1: function checkStep1() {
       if (this.age < 18) {
-        this.e1 = 4;
+        this.step = 5;
       } else {
-        this.e1 = 2;
+        this.step = 2;
       }
     },
     checkStep2: function checkStep2() {
       if (!this.drivingLicenseOwned) {
-        this.e1 = 4;
+        this.step = 5;
       } else {
-        this.e1 = 3;
+        this.step = 3;
+      }
+    },
+    carNameValidateCheck: function carNameValidateCheck() {
+      if (!this.newCar.match(this.carNamePattern)) {
+        return ['Model name is incorrect.'];
+      }
+      return [''];
+    },
+    carNameExistCheck: function carNameExistCheck(newCar) {
+      if (this.cars.some(function (car) {
+        return car.name == newCar;
+      })) {
+        return ['Model name already present.'];
+      }
+      return [''];
+    },
+    addCar: function addCar() {
+      if (this.carNameValidateCheck() && !this.carNameExistCheck(this.newCar)) {
+        this.cars.push({ name: this.newCar });
+        this.newCar = '';
       }
     }
   }
@@ -60933,36 +60991,50 @@ var render = function() {
     "v-stepper",
     {
       model: {
-        value: _vm.e1,
+        value: _vm.step,
         callback: function($$v) {
-          _vm.e1 = $$v
+          _vm.step = $$v
         },
-        expression: "e1"
+        expression: "step"
       }
     },
     [
       _c(
         "v-stepper-header",
         [
-          _c("v-stepper-step", { attrs: { step: "1", complete: _vm.e1 > 1 } }, [
-            _vm._v("Generics")
-          ]),
+          _c(
+            "v-stepper-step",
+            { attrs: { step: "1", complete: _vm.step > 1 } },
+            [_vm._v("Generics")]
+          ),
           _vm._v(" "),
           _c("v-divider"),
           _vm._v(" "),
-          _c("v-stepper-step", { attrs: { step: "2", complete: _vm.e1 > 2 } }, [
-            _vm._v("Driving license")
-          ]),
+          _c(
+            "v-stepper-step",
+            { attrs: { step: "2", complete: _vm.step > 2 } },
+            [_vm._v("License")]
+          ),
           _vm._v(" "),
           _c("v-divider"),
           _vm._v(" "),
-          _c("v-stepper-step", { attrs: { step: "3", complete: _vm.e1 > 3 } }, [
-            _vm._v("Driving experience")
-          ]),
+          _c(
+            "v-stepper-step",
+            { attrs: { step: "3", complete: _vm.step > 3 } },
+            [_vm._v("Interests")]
+          ),
           _vm._v(" "),
           _c("v-divider"),
           _vm._v(" "),
-          _c("v-stepper-step", { attrs: { step: "4" } }, [_vm._v("Summary")])
+          _c(
+            "v-stepper-step",
+            { attrs: { step: "4", complete: _vm.step > 4 } },
+            [_vm._v("Experiences")]
+          ),
+          _vm._v(" "),
+          _c("v-divider"),
+          _vm._v(" "),
+          _c("v-stepper-step", { attrs: { step: "5" } }, [_vm._v("Summary")])
         ],
         1
       ),
@@ -61002,7 +61074,6 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
-                                  name: "input-1-3",
                                   label: "Age",
                                   min: 0,
                                   max: 100,
@@ -61274,7 +61345,7 @@ var render = function() {
                   attrs: { color: "primary" },
                   nativeOn: {
                     click: function($event) {
-                      _vm.e1 = 4
+                      _vm.step = 4
                     }
                   }
                 },
@@ -61288,6 +61359,150 @@ var render = function() {
             "v-stepper-content",
             { attrs: { step: "4" } },
             [
+              _c(
+                "v-card",
+                {
+                  staticClass: "mb-5",
+                  attrs: { with: "400px", height: "400px" }
+                },
+                [
+                  _c(
+                    "v-container",
+                    { attrs: { fluid: "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "", wrap: "", "align-center": "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c("v-subheader", [
+                                _vm._v("Insert model names you have driven:")
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "", wrap: "", "align-center": "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs10: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  rules: [
+                                    _vm.carNameValidateCheck ||
+                                      !_vm.carNameExistCheck
+                                  ],
+                                  label: "Inser a BMW model name"
+                                },
+                                model: {
+                                  value: _vm.newCar,
+                                  callback: function($$v) {
+                                    _vm.newCar = $$v
+                                  },
+                                  expression: "newCar"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs2: "" } },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { color: "primary" },
+                                  on: { click: _vm.addCar }
+                                },
+                                [_vm._v("+")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { row: "", wrap: "", "align-center": "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c(
+                                "v-list",
+                                _vm._l(_vm.cars, function(car) {
+                                  return _c(
+                                    "v-list-tile",
+                                    {
+                                      key: car.name,
+                                      attrs: { avatar: "" },
+                                      on: { click: function($event) {} }
+                                    },
+                                    [
+                                      _c(
+                                        "v-list-tile-content",
+                                        [
+                                          _c("v-list-tile-title", {
+                                            domProps: {
+                                              textContent: _vm._s(car.name)
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                })
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "primary" },
+                  nativeOn: {
+                    click: function($event) {
+                      _vm.step = 5
+                    }
+                  }
+                },
+                [_vm._v("Continue")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-stepper-content",
+            { attrs: { step: "5" } },
+            [
               _c("v-card", {
                 staticClass: "mb-5",
                 attrs: { with: "400px", height: "400px" }
@@ -61299,7 +61514,7 @@ var render = function() {
                   attrs: { color: "primary" },
                   nativeOn: {
                     click: function($event) {
-                      _vm.e1 = 4
+                      _vm.step = 5
                     }
                   }
                 },
