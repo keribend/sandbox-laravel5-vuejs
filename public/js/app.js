@@ -80724,22 +80724,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      drawer: true,
-      menuEntries: [{
-        active: true,
-        title: "Pollings",
-        icon: "question_answer",
-        to: "/pollings",
-        subEntries: []
-      }, {
-        title: 'Attractions',
-        icon: "show_chart",
-        subEntries: [{ title: 'Bullet 1', to: "/statistics/bullet1" }, { title: 'Bullet 2' }, { title: 'Bullet 3' }]
-      }]
+      drawer: true
     };
   }
 });
@@ -80771,72 +80762,61 @@ var render = function() {
         [
           _c(
             "v-list",
-            _vm._l(_vm.menuEntries, function(menuEntry) {
-              return _c(
-                "v-list-group",
-                { key: menuEntry.title, attrs: { value: menuEntry.active } },
+            { attrs: { dense: "" } },
+            [
+              _c(
+                "v-list-tile",
+                {
+                  attrs: { to: "/pollings" },
+                  on: { click: function($event) {} }
+                },
                 [
                   _c(
-                    "v-list-tile",
-                    {
-                      attrs: { slot: "menuEntry", to: "menuEntry.to" },
-                      on: { click: function($event) {} },
-                      slot: "menuEntry"
-                    },
-                    [
-                      _c(
-                        "v-list-tile-action",
-                        [_c("v-icon", [_vm._v(_vm._s(menuEntry.icon))])],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-list-tile-content",
-                        [
-                          _c("v-list-tile-title", [
-                            _vm._v(_vm._s(menuEntry.title))
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      menuEntry.subEntries.length > 0
-                        ? _c(
-                            "v-list-tile-action",
-                            [_c("v-icon", [_vm._v("keyboard_arrow_down")])],
-                            1
-                          )
-                        : _vm._e()
-                    ],
+                    "v-list-tile-action",
+                    [_c("v-icon", [_vm._v("question_answer")])],
                     1
                   ),
                   _vm._v(" "),
-                  _vm._l(menuEntry.subEntries, function(subEntry) {
-                    return _c(
-                      "v-list-tile",
-                      {
-                        key: subEntry.title,
-                        attrs: { to: "subEntry.to" },
-                        on: { click: function($event) {} }
-                      },
-                      [
-                        _c(
-                          "v-list-tile-content",
-                          [
-                            _c("v-list-tile-title", [
-                              _vm._v(_vm._s(subEntry.title))
-                            ])
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  })
+                  _c(
+                    "v-list-tile-content",
+                    [
+                      _c("v-list-tile-title", [
+                        _vm._v("\n            Pollings\n          ")
+                      ])
+                    ],
+                    1
+                  )
                 ],
-                2
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-tile",
+                {
+                  attrs: { to: "/statistics" },
+                  on: { click: function($event) {} }
+                },
+                [
+                  _c(
+                    "v-list-tile-action",
+                    [_c("v-icon", [_vm._v("show_chart")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-tile-content",
+                    [
+                      _c("v-list-tile-title", [
+                        _vm._v("\n            Statistics\n          ")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
               )
-            })
+            ],
+            1
           )
         ],
         1
@@ -82037,30 +82017,8 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_LineChart_vue__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_LineChart_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__data_LineChart_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue__);
 //
 //
 //
@@ -82080,7 +82038,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    LineChart: __WEBPACK_IMPORTED_MODULE_0__data_LineChart_vue___default.a
+    DoughnutChart: __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue___default.a
   },
   data: function data() {
     return {
@@ -82116,7 +82074,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/data/LineChart.vue"
+Component.options.__file = "resources/assets/js/components/data/DoughnutChart.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -82125,9 +82083,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5fd4575c", Component.options)
+    hotAPI.createRecord("data-v-20174a0e", Component.options)
   } else {
-    hotAPI.reload("data-v-5fd4575c", Component.options)
+    hotAPI.reload("data-v-20174a0e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -82147,7 +82105,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_chartjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_chartjs__);
 
 
-/* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0_vue_chartjs__["Line"].extend({
+/* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0_vue_chartjs__["Doughnut"].extend({
   mounted: function mounted() {
     this.renderChart({
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -82156,7 +82114,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         backgroundColor: '#f87979',
         data: [40, 39, 10, 40, 39, 80, 40]
       }]
-    });
+    }, { responsive: true, maintainAspectRatio: false });
   }
 }));
 
@@ -98931,92 +98889,9 @@ var render = function() {
             { attrs: { xs: "" } },
             [
               _c(
-                "v-tabs",
-                {
-                  model: {
-                    value: _vm.active,
-                    callback: function($$v) {
-                      _vm.active = $$v
-                    },
-                    expression: "active"
-                  }
-                },
-                [
-                  _c(
-                    "v-tabs-bar",
-                    { staticClass: "blue", attrs: { dark: "" } },
-                    [
-                      _c(
-                        "v-tabs-item",
-                        { attrs: { ripple: "", href: "#tab-1" } },
-                        [_vm._v("Item 1")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-tabs-item",
-                        { attrs: { ripple: "", href: "#tab-2" } },
-                        [_vm._v("Item 2")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-tabs-item",
-                        { attrs: { ripple: "", href: "#tab-3" } },
-                        [_vm._v("Item 3")]
-                      ),
-                      _vm._v(" "),
-                      _c("v-tabs-slider", { attrs: { color: "white" } })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-tabs-items",
-                    [
-                      _c(
-                        "v-tabs-content",
-                        { attrs: { id: "tab-1" } },
-                        [
-                          _c(
-                            "v-card",
-                            { attrs: { flat: "", height: "500px" } },
-                            [_c("v-card-text", [_c("line-chart")], 1)],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-tabs-content",
-                        { attrs: { id: "tab-2" } },
-                        [
-                          _c(
-                            "v-card",
-                            { attrs: { flat: "", height: "500px" } },
-                            [_c("v-card-text", [_vm._v(_vm._s(_vm.text))])],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-tabs-content",
-                        { attrs: { id: "tab-3" } },
-                        [
-                          _c(
-                            "v-card",
-                            { attrs: { flat: "", height: "500px" } },
-                            [_c("v-card-text", [_vm._v(_vm._s(_vm.text))])],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
+                "v-card",
+                { attrs: { flat: "", height: "500px" } },
+                [_c("v-card-text", [_c("doughnut-chart")], 1)],
                 1
               )
             ],

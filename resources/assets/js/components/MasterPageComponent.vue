@@ -6,7 +6,7 @@
       v-model="drawer"
       app
     >
-      <v-list>
+      <v-list dense>
         <v-list-tile to="/pollings" @click="">
           <v-list-tile-action>
             <v-icon>question_answer</v-icon>
