@@ -97,4 +97,26 @@ class PollingExecutionController extends Controller
             'data' => $json_data,
         ]);
     }
+
+    public function bullet3() {
+        $pollings = PollingExecution::where('drivingLicenseOwned', true)->get();
+
+        $careDrifting = $pollings->where('drifting', true);
+
+        $json_data = [
+            [
+                "label" => "Care about drifting",
+                "data" => [$careDrifting->count()]
+            ],
+            [
+                "label" => "Do not",
+                "data" => [$pollings->count() - $careDrifting->count()]
+            ],
+        ];
+        
+        return response()->json([
+            'status' => true,
+            'data' => $json_data,
+        ]);
+    }
 }

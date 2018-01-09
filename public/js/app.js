@@ -32102,14 +32102,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_MasterPageComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_MasterPageComponent_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_PollingComponent_vue__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_PollingComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_PollingComponent_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Statistics1Component_vue__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Statistics1Component_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Statistics1Component_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_axios__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vue_axios__ = __webpack_require__(283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vue_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_vue_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_vue_router__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__routes__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vue_axios__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vue_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_vue_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vue_router__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__routes__ = __webpack_require__(284);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -32129,13 +32127,11 @@ __webpack_require__(156);
 
 
 
-
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuetify___default.a);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_7_vue_axios___default.a, __WEBPACK_IMPORTED_MODULE_6_axios___default.a);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_8_vue_router__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_6_vue_axios___default.a, __WEBPACK_IMPORTED_MODULE_5_axios___default.a);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_7_vue_router__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('master-page', __WEBPACK_IMPORTED_MODULE_3__components_MasterPageComponent_vue___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('polling', __WEBPACK_IMPORTED_MODULE_4__components_PollingComponent_vue___default.a);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Statistics1', __WEBPACK_IMPORTED_MODULE_5__components_Statistics1Component_vue___default.a);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -32145,7 +32141,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Statistics1', __WEBPACK_I
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#app',
-  router: __WEBPACK_IMPORTED_MODULE_9__routes__["a" /* default */]
+  router: __WEBPACK_IMPORTED_MODULE_8__routes__["a" /* default */]
 });
 
 /***/ }),
@@ -80736,6 +80732,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -80844,6 +80850,32 @@ var render = function() {
                     [
                       _c("v-list-tile-title", [
                         _vm._v("\n            Statistics 2\n          ")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-tile",
+                {
+                  attrs: { to: "/statistics3" },
+                  on: { click: function($event) {} }
+                },
+                [
+                  _c(
+                    "v-list-tile-action",
+                    [_c("v-icon", [_vm._v("show_chart")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-tile-content",
+                    [
+                      _c("v-list-tile-title", [
+                        _vm._v("\n            Statistics 3\n          ")
                       ])
                     ],
                     1
@@ -99121,6 +99153,9 @@ var routes = [{
   path: '/statistics2',
   component: __webpack_require__(293)
 }, {
+  path: '/statistics3',
+  component: __webpack_require__(296)
+}, {
   path: '*',
   redirect: '/'
 }];
@@ -99319,6 +99354,186 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-05e5e205", module.exports)
+  }
+}
+
+/***/ }),
+/* 296 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+var __vue_script__ = __webpack_require__(297)
+/* template */
+var __vue_template__ = __webpack_require__(298)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Statistics3Component.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3078a8b8", Component.options)
+  } else {
+    hotAPI.reload("data-v-3078a8b8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 297 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    DoughnutChart: __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue___default.a
+  },
+  data: function data() {
+    return {
+      loaded: false,
+      loading: false,
+      rawData: '',
+      data: [],
+      labels: [],
+      showError: false,
+      showSettings: false,
+      errorMessage: '',
+      url: ''
+    };
+  },
+  mounted: function mounted() {
+    this.requestData();
+  },
+
+  methods: {
+    requestData: function requestData() {
+      var _this = this;
+
+      this.loading = true;
+      this.loaded = false;
+      this.url = 'http://localhost:8000/api/pollingexecutions/stats/bullet3';
+      axios.get('http://localhost:8000/api/pollingexecutions/stats/bullet3').then(function (response) {
+        if (response.data && response.data.status) {
+          _this.rawData = response.data.data;
+          _this.data = response.data.data.map(function (entry) {
+            return entry.data;
+          });
+          _this.labels = response.data.data.map(function (entry) {
+            return entry.label;
+          });
+          _this.loaded = true;
+          _this.loading = false;
+        }
+      }).catch(function (err) {
+        _this.errorMessage = err;
+        _this.showError = true;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 298 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "", "align-center": "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs: "" } },
+            [
+              _c(
+                "v-card",
+                { attrs: { flat: "", height: "500px" } },
+                [
+                  _c(
+                    "v-card-text",
+                    [
+                      _vm.loaded
+                        ? _c("doughnut-chart", {
+                            attrs: {
+                              "chart-data": _vm.data,
+                              "chart-labels": _vm.labels
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3078a8b8", module.exports)
   }
 }
 

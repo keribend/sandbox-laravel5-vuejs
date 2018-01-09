@@ -18,6 +18,10 @@ let routes = [
     component: require('./components/Statistics2Component.vue')
   },
   {
+    path: '/statistics3',
+    component: require('./components/Statistics3Component.vue')
+  },
+  {
     path: '*',
     redirect: '/'
   }
