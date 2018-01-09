@@ -12,7 +12,9 @@
           <v-tabs-items>
             <v-tabs-content id="tab-1">
               <v-card flat height="500px">
-                <v-card-text>{{ text }}</v-card-text>
+                <v-card-text>
+                  <line-chart></line-chart>
+                </v-card-text>
               </v-card>
             </v-tabs-content>
             <v-tabs-content id="tab-2">
@@ -33,7 +35,12 @@
 </template>
 
 <script>
+import LineChart from './data/LineChart.vue'
+
 export default {
+  components: {
+    LineChart
+  },
   data () {
     return {
       active: null,
