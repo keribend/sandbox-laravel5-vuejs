@@ -12,8 +12,11 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import MasterPage from './components/MasterPageComponent.vue'
 import Polling from './components/PollingComponent.vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.use(Vuetify)
+Vue.use(VueAxios, axios)
 Vue.component('master-page', MasterPage)
 Vue.component('polling', Polling)
 

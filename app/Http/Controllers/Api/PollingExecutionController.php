@@ -14,9 +14,6 @@ class PollingExecutionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        echo '<pre>';
-        // print_r($request->input());
-        // die();
         $polling = new PollingExecution();
         $input = $request->input();
         $polling->fill($input);
@@ -30,17 +27,19 @@ class PollingExecutionController extends Controller
         $polling->save();
 
         $carsToSave = [];
-        foreach ($input['cars'] as $carName) {
-            $car = new \App\Car();
-            $car->fill([ 'model' => $carName ]);
-            if ($car->isValid()) {
-                $carsToSave[] = $car;
+        if ($input['cars']) {
+            foreach ($input['cars'] as $rawCar) {
+                $car = new \App\Car();
+                $car->fill([ 'model' => $rawCar['name'] ]);
+                if ($car->isValid()) {
+                    $carsToSave[] = $car;
+                }
             }
         }
 
         $polling->cars()->saveMany($carsToSave);
 
-        return response()->json([ 'status' => true, 'polling_id' => $polling->id ]);
+        return response()->json([ 'status' => true, 'pollingId' => $polling->id ]);
     }
 
     public function show($id) {

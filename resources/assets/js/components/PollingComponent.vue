@@ -9,7 +9,7 @@
       <v-divider></v-divider>
       <v-stepper-step step="4" :complete="step > 4">Experiences</v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step step="5">Summary</v-stepper-step>
+      <v-stepper-step step="5" :complete="step > 5">Summary</v-stepper-step>
     </v-stepper-header>
     <v-stepper-items>
       <v-stepper-content step="1">
@@ -192,9 +192,18 @@
             </v-flex>
           </v-layout>
         </v-card>
-        <v-btn color="primary" @click.native="step = 5">Send</v-btn>
+        <v-btn color="primary" :disabled="disableSend" @click.native="send">Send</v-btn>
       </v-stepper-content>
     </v-stepper-items>
+    <v-snackbar
+        :timeout="snackbar.timeout"
+        :color="snackbar.color"
+        :bottom="snackbar.bottom"
+        v-model="snackbar.show"
+      >
+      {{ snackbar.text }}
+      <v-btn dark flat @click.native="snackbar.show = false">Close</v-btn>
+    </v-snackbar>
   </v-stepper>
 </template>
 
@@ -213,7 +222,15 @@
         cars: [],
         newCar: '',
         carNamePattern: /^(M?[0-9]{3}(d|i)?)$|(^(X|Z)[0-9]$)/i,
-        carNameErrorMessages: []
+        carNameErrorMessages: [],
+        snackbar: {
+          show: false,
+          color: '',
+          timeout: 5000,
+          text: '',
+          bottom: "bottom"  
+        },
+        disableSend: false
       }
     },
     watch: {
@@ -266,6 +283,32 @@
           this.newCar = ''
           this.carNameErrorMessages = []
         }
+      },
+      send: function() {
+        axios.post("api/pollingexecutions", {
+          age: this.age,
+          gender: this.gender,
+          drivingLicenseOwned: this.drivingLicenseOwned,
+          drivetrain: this.drivetrain,
+          drifting: this.drifting,
+          cars: this.cars
+        })
+        .then(response => {
+          console.log(response.data)
+          if (response.data && response.data.status) {
+            this.snackbar.show = true
+            this.snackbar.color = "success"
+            this.snackbar.text = "Polling id ["+response.data.pollingId+"] successfully submitted!"
+            this.disableSend = true
+            this.step += 1
+          }
+        })
+        .catch(e => {
+          console.log(e)
+          this.snackbar.show = true
+          this.snackbar.color = "error"
+          this.snackbar.text = "Whoops! Something went wrong! Try again."
+        })
       }
     }
   }
