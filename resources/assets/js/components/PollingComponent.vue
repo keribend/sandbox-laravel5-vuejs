@@ -134,7 +134,9 @@
         <v-btn color="primary" @click.native="step = 5">Continue</v-btn>
       </v-stepper-content>
       <v-stepper-content step="5">
-        <v-card class="mb-5" with="400px" height="400px"></v-card>
+        <v-card class="mb-5" with="400px" height="400px">
+          
+        </v-card>
         <v-btn color="primary" @click.native="step = 5">Send</v-btn>
       </v-stepper-content>
     </v-stepper-items>
@@ -196,9 +198,6 @@
       },
       carNameExistCheck: function (newCar) {
         if (this.cars.some(function (car) {
-          // console.log("------> car.name: ["+car.name+"]")
-          // console.log("------> newCar: ["+newCar+"]")
-          // console.log("------> condition-inside: ["+(car.name == newCar)+"]")
           return car.name == newCar })) {
           this.carNameErrorMessages = ['Model name already present.']
           return true
@@ -207,12 +206,6 @@
         return false
       },
       addCar: function () {
-        // console.log("this.newCar: ["+this.newCar+"]")
-        // console.log("this.carNamePattern: ["+this.carNamePattern+"]")
-        // console.log("this.carNameValidateCheck(): ["+this.carNameValidateCheck()+"]")
-        // console.log("this.carNameExistCheck(this.newCar): ["+(this.carNameExistCheck(this.newCar))+"]")
-        // console.log("!this.carNameExistCheck(this.newCar): ["+(!this.carNameExistCheck(this.newCar))+"]")
-        // console.log("condition: ["+(this.carNameValidateCheck() && !this.carNameExistCheck(this.newCar))+"]")
         if (this.carNameValidateCheck() && !this.carNameExistCheck(this.newCar)) {
           this.cars.push({name: this.newCar})
           this.newCar = ''

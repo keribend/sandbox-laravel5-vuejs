@@ -60924,6 +60924,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60980,9 +60982,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     carNameExistCheck: function carNameExistCheck(newCar) {
       if (this.cars.some(function (car) {
-        // console.log("------> car.name: ["+car.name+"]")
-        // console.log("------> newCar: ["+newCar+"]")
-        // console.log("------> condition-inside: ["+(car.name == newCar)+"]")
         return car.name == newCar;
       })) {
         this.carNameErrorMessages = ['Model name already present.'];
@@ -60992,12 +60991,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return false;
     },
     addCar: function addCar() {
-      // console.log("this.newCar: ["+this.newCar+"]")
-      // console.log("this.carNamePattern: ["+this.carNamePattern+"]")
-      // console.log("this.carNameValidateCheck(): ["+this.carNameValidateCheck()+"]")
-      // console.log("this.carNameExistCheck(this.newCar): ["+(this.carNameExistCheck(this.newCar))+"]")
-      // console.log("!this.carNameExistCheck(this.newCar): ["+(!this.carNameExistCheck(this.newCar))+"]")
-      // console.log("condition: ["+(this.carNameValidateCheck() && !this.carNameExistCheck(this.newCar))+"]")
       if (this.carNameValidateCheck() && !this.carNameExistCheck(this.newCar)) {
         this.cars.push({ name: this.newCar });
         this.newCar = '';
@@ -61490,16 +61483,20 @@ var render = function() {
                                 _vm._l(_vm.cars, function(car) {
                                   return _c(
                                     "v-list-tile",
-                                    { key: car.name, attrs: { avatar: "" } },
+                                    {
+                                      key: car.name,
+                                      attrs: { avatar: "" },
+                                      on: { click: function($event) {} }
+                                    },
                                     [
+                                      _vm._v(">\n                  "),
                                       _c(
                                         "v-list-tile-content",
                                         [
                                           _c("v-list-tile-title", {
                                             domProps: {
                                               textContent: _vm._s(car.name)
-                                            },
-                                            on: { click: function($event) {} }
+                                            }
                                           })
                                         ],
                                         1
