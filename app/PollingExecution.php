@@ -33,4 +33,8 @@ class PollingExecution extends Model
         $this->errors = $validator->errors();
         return false;
     }
+
+    public function cars() {
+        return $this->hasMany('App\Car');
+    }
 }

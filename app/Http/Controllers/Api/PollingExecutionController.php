@@ -14,17 +14,38 @@ class PollingExecutionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-
-        $answers = new PollingExecution();
+        echo '<pre>';
+        // print_r($request->input());
+        // die();
+        $polling = new PollingExecution();
         $input = $request->input();
-        $answers->fill($input);
-        if (!$answers->isValid()) {
+        $polling->fill($input);
+        if (!$polling->isValid()) {
             return response()->json([
                 'status' => false,
-                'errors' => $answers->errors,
+                'errors' => $polling->errors,
             ]);
         }
-        return response()->json([ 'status' => true ]);
+
+        $polling->save();
+
+        $carsToSave = [];
+        foreach ($input['cars'] as $carName) {
+            $car = new \App\Car();
+            $car->fill([ 'model' => $carName ]);
+            if ($car->isValid()) {
+                $carsToSave[] = $car;
+            }
+        }
+
+        $polling->cars()->saveMany($carsToSave);
+
+        return response()->json([ 'status' => true, 'polling_id' => $polling->id ]);
+    }
+
+    public function show($id) {
+        $polling = PollingExecution::with('cars')->where('id', '=', $id)->first();
+        return response()->json($polling);
     }
 
 }

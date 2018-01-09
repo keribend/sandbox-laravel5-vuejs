@@ -60926,6 +60926,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -61384,7 +61439,7 @@ var render = function() {
                 "v-card",
                 {
                   staticClass: "mb-5",
-                  attrs: { with: "400px", height: "400px" }
+                  attrs: { with: "400px", height: "auto" }
                 },
                 [
                   _c(
@@ -61489,7 +61544,6 @@ var render = function() {
                                       on: { click: function($event) {} }
                                     },
                                     [
-                                      _vm._v(">\n                  "),
                                       _c(
                                         "v-list-tile-content",
                                         [
@@ -61539,10 +61593,213 @@ var render = function() {
             "v-stepper-content",
             { attrs: { step: "5" } },
             [
-              _c("v-card", {
-                staticClass: "mb-5",
-                attrs: { with: "400px", height: "400px" }
-              }),
+              _c(
+                "v-card",
+                {
+                  staticClass: "mb-5",
+                  attrs: { with: "400px", height: "auto" }
+                },
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { row: "", wrap: "", "align-center": "" } },
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs8: "" } },
+                        [_c("v-subheader", [_vm._v("Age:")])],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs4: "" } },
+                        [_c("v-subheader", [_vm._v(_vm._s(_vm.age))])],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-layout",
+                    { attrs: { row: "", wrap: "", "align-center": "" } },
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs8: "" } },
+                        [_c("v-subheader", [_vm._v("Gender:")])],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs4: "" } },
+                        [_c("v-subheader", [_vm._v(_vm._s(_vm.gender))])],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm.age >= 18
+                    ? _c(
+                        "v-layout",
+                        { attrs: { row: "", wrap: "", "align-center": "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs8: "" } },
+                            [_c("v-subheader", [_vm._v("Driving license:")])],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs4: "" } },
+                            [
+                              _c("v-subheader", [
+                                _vm._v(
+                                  _vm._s(_vm.drivingLicenseOwned.toString())
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.drivingLicenseOwned
+                    ? _c(
+                        "v-layout",
+                        { attrs: { row: "", wrap: "", "align-center": "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs8: "" } },
+                            [
+                              _c("v-subheader", [
+                                _vm._v("Favourite drivetrain:")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs4: "" } },
+                            [
+                              _c("v-subheader", [
+                                _vm._v(_vm._s(_vm.drivetrain || "I don't know"))
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.drivingLicenseOwned
+                    ? _c(
+                        "v-layout",
+                        { attrs: { row: "", wrap: "", "align-center": "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs8: "" } },
+                            [
+                              _c("v-subheader", [
+                                _vm._v("You care about drifting:")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs4: "" } },
+                            [
+                              _c("v-subheader", [
+                                _vm._v(_vm._s(_vm.drifting.toString()))
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.cars.length > 0
+                    ? _c(
+                        "v-layout",
+                        { attrs: { row: "", wrap: "", "align-center": "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c("v-subheader", [
+                                _vm._v("Car models you driven:")
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.cars.length > 0
+                    ? _c(
+                        "v-layout",
+                        { attrs: { row: "", wrap: "", "align-center": "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c(
+                                "v-list",
+                                { attrs: { dense: "" } },
+                                _vm._l(_vm.cars, function(car) {
+                                  return _c(
+                                    "v-list-tile",
+                                    {
+                                      key: car.name,
+                                      attrs: { avatar: "" },
+                                      on: { click: function($event) {} }
+                                    },
+                                    [
+                                      _c(
+                                        "v-list-tile-content",
+                                        [
+                                          _c("v-list-tile-title", {
+                                            domProps: {
+                                              textContent: _vm._s(car.name)
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                })
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e()
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
                 "v-btn",

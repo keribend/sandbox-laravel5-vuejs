@@ -98,7 +98,7 @@
         <v-btn color="primary" @click.native="step = 4">Continue</v-btn>
       </v-stepper-content>
       <v-stepper-content step="4">
-        <v-card class="mb-5" with="400px" height="400px">
+        <v-card class="mb-5" with="400px" height="auto">
           <v-container fluid>
             <v-layout row wrap align-center>
               <v-flex xs12>
@@ -121,7 +121,7 @@
             <v-layout row wrap align-center>
               <v-flex xs12>
                 <v-list dense>
-                  <v-list-tile avatar v-for="car in cars" v-bind:key="car.name" @click="">>
+                  <v-list-tile avatar v-for="car in cars" v-bind:key="car.name" @click="">
                     <v-list-tile-content>
                       <v-list-tile-title v-text="car.name"></v-list-tile-title>
                     </v-list-tile-content>
@@ -134,8 +134,63 @@
         <v-btn color="primary" @click.native="step = 5">Continue</v-btn>
       </v-stepper-content>
       <v-stepper-content step="5">
-        <v-card class="mb-5" with="400px" height="400px">
-          
+        <v-card class="mb-5" with="400px" height="auto">
+          <v-layout row wrap align-center>
+            <v-flex xs8>
+              <v-subheader>Age:</v-subheader>
+            </v-flex>
+            <v-flex xs4>
+              <v-subheader>{{ age }}</v-subheader>
+            </v-flex>
+          </v-layout>
+          <v-layout row wrap align-center>
+            <v-flex xs8>
+              <v-subheader>Gender:</v-subheader>
+            </v-flex>
+            <v-flex xs4>
+              <v-subheader>{{ gender }}</v-subheader>
+            </v-flex>
+          </v-layout>
+          <v-layout v-if="age >= 18" row wrap align-center>
+            <v-flex xs8>
+              <v-subheader>Driving license:</v-subheader>
+            </v-flex>
+            <v-flex xs4>
+              <v-subheader>{{ drivingLicenseOwned.toString() }}</v-subheader>
+            </v-flex>
+          </v-layout>
+          <v-layout v-if="drivingLicenseOwned" row wrap align-center>
+            <v-flex xs8>
+              <v-subheader>Favourite drivetrain:</v-subheader>
+            </v-flex>
+            <v-flex xs4>
+              <v-subheader>{{ drivetrain || "I don't know" }}</v-subheader>
+            </v-flex>
+          </v-layout>
+          <v-layout v-if="drivingLicenseOwned" row wrap align-center>
+            <v-flex xs8>
+              <v-subheader>You care about drifting:</v-subheader>
+            </v-flex>
+            <v-flex xs4>
+              <v-subheader>{{ drifting.toString() }}</v-subheader>
+            </v-flex>
+          </v-layout>
+          <v-layout v-if="cars.length > 0" row wrap align-center>
+            <v-flex xs12>
+              <v-subheader>Car models you driven:</v-subheader>
+            </v-flex>
+          </v-layout>
+          <v-layout v-if="cars.length > 0" row wrap align-center>
+            <v-flex xs12>
+              <v-list dense>
+                <v-list-tile avatar v-for="car in cars" v-bind:key="car.name" @click="">
+                  <v-list-tile-content>
+                    <v-list-tile-title v-text="car.name"></v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+              </v-list>
+            </v-flex>
+          </v-layout>
         </v-card>
         <v-btn color="primary" @click.native="step = 5">Send</v-btn>
       </v-stepper-content>

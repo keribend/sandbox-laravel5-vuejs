@@ -15,12 +15,12 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('pollingExecution_id');
-            $table->string('model')->nullable(false)->change();
+            $table->unsignedInteger('polling_execution_id');
+            $table->string('model');
             $table->timestamps();
-            $table->foreign('pollingExecution_id')
+            $table->foreign('polling_execution_id')
                   ->references('id')
-                  ->on('pollingExecutions')
+                  ->on('polling_executions')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         });
@@ -34,7 +34,7 @@ class CreateCarsTable extends Migration
     public function down()
     {
         Schema::table('cars', function(Blueprint $table) {
-            $table->dropForeign('cars_pollingExecution_id_foreign');
+            $table->dropForeign('cars_polling_execution_id_foreign');
         });
         Schema::dropIfExists('cars');
     }

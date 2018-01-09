@@ -13,13 +13,13 @@ class CreatePollingExecutionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pollingExecutions', function (Blueprint $table) {
+        Schema::create('polling_executions', function (Blueprint $table) {
             $table->increments('id');
-            $table->tinyInteger('age', $autoIncrement = false, $unsigned = true)->nullable(false)->change();
-            $table->string('gender', 50)->default("M")->nullable(false)->change();
-            $table->boolean('drivingLicenseOwned')->default(false)->nullable(false)->change();
-            $table->string('drivetrain', 25)->default(null)->nullable(true)->change();
-            $table->boolean('drifting')->default(null)->nullable(true)->change();
+            $table->tinyInteger('age', $autoIncrement = false, $unsigned = true);
+            $table->string('gender', 50)->default("M");
+            $table->boolean('drivingLicenseOwned')->default(false);
+            $table->string('drivetrain', 10)->default(null)->nullable();
+            $table->boolean('drifting')->default(null)->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreatePollingExecutionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pollingExecutions');
+        Schema::dropIfExists('polling_executions');
     }
 }
