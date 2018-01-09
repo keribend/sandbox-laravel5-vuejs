@@ -80722,46 +80722,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -80844,110 +80804,6 @@ var render = function() {
                     [
                       _c("v-list-tile-title", [
                         _vm._v("\n            Statistics 1\n          ")
-                      ])
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-list-tile",
-                {
-                  attrs: { to: "/statistics2" },
-                  on: { click: function($event) {} }
-                },
-                [
-                  _c(
-                    "v-list-tile-action",
-                    [_c("v-icon", [_vm._v("show_chart")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-list-tile-content",
-                    [
-                      _c("v-list-tile-title", [
-                        _vm._v("\n            Statistics 2\n          ")
-                      ])
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-list-tile",
-                {
-                  attrs: { to: "/statistics3" },
-                  on: { click: function($event) {} }
-                },
-                [
-                  _c(
-                    "v-list-tile-action",
-                    [_c("v-icon", [_vm._v("show_chart")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-list-tile-content",
-                    [
-                      _c("v-list-tile-title", [
-                        _vm._v("\n            Statistics 3\n          ")
-                      ])
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-list-tile",
-                {
-                  attrs: { to: "/statistics4" },
-                  on: { click: function($event) {} }
-                },
-                [
-                  _c(
-                    "v-list-tile-action",
-                    [_c("v-icon", [_vm._v("show_chart")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-list-tile-content",
-                    [
-                      _c("v-list-tile-title", [
-                        _vm._v("\n            Statistics 4\n          ")
-                      ])
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-list-tile",
-                {
-                  attrs: { to: "/statistics6" },
-                  on: { click: function($event) {} }
-                },
-                [
-                  _c(
-                    "v-list-tile-action",
-                    [_c("v-icon", [_vm._v("show_chart")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-list-tile-content",
-                    [
-                      _c("v-list-tile-title", [
-                        _vm._v("\n            Statistics 5-6\n          ")
                       ])
                     ],
                     1
@@ -82177,18 +82033,6 @@ var routes = [{
   path: '/statistics1',
   component: __webpack_require__(192)
 }, {
-  path: '/statistics2',
-  component: __webpack_require__(285)
-}, {
-  path: '/statistics3',
-  component: __webpack_require__(288)
-}, {
-  path: '/statistics4',
-  component: __webpack_require__(291)
-}, {
-  path: '/statistics6',
-  component: __webpack_require__(294)
-}, {
   path: '*',
   redirect: '/'
 }];
@@ -82266,6 +82110,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -82283,7 +82150,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       showError: false,
       showSettings: false,
       errorMessage: '',
-      url: ''
+      url: '',
+      average: 0,
+      lastRequestData: 'bullet1'
     };
   },
   mounted: function mounted() {
@@ -82296,23 +82165,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.loading = true;
       this.loaded = false;
-      this.url = 'http://localhost:8000/api/pollingexecutions/stats/bullet1';
-      axios.get('http://localhost:8000/api/pollingexecutions/stats/bullet1').then(function (response) {
-        if (response.data && response.data.status) {
-          _this.rawData = response.data.data;
-          _this.data = response.data.data.map(function (entry) {
-            return entry.data;
-          });
-          _this.labels = response.data.data.map(function (entry) {
-            return entry.label;
-          });
-          _this.loaded = true;
-          _this.loading = false;
-        }
-      }).catch(function (err) {
-        _this.errorMessage = err;
-        _this.showError = true;
-      });
+      this.url = 'http://localhost:8000/api/pollingexecutions/stats/' + this.lastRequestData;
+      if (this.lastRequestData == 'bullet5') {
+        axios.get(this.url).then(function (response) {
+          if (response.data && response.data.status) {
+            _this.average = response.data.average;
+          }
+        }).catch(function (err) {
+          _this.errorMessage = err;
+          _this.showError = true;
+        });
+      } else {
+        axios.get(this.url).then(function (response) {
+          if (response.data && response.data.status) {
+            _this.rawData = response.data.data;
+            _this.data = response.data.data.map(function (entry) {
+              return entry.data;
+            });
+            _this.labels = response.data.data.map(function (entry) {
+              return entry.label;
+            });
+            _this.loaded = true;
+            _this.loading = false;
+          }
+        }).catch(function (err) {
+          _this.errorMessage = err;
+          _this.showError = true;
+        });
+      }
+    },
+    statistics1: function statistics1() {
+      this.lastRequestData = 'bullet1';
+      this.requestData();
+    },
+    statistics2: function statistics2() {
+      this.lastRequestData = 'bullet2';
+      this.requestData();
+    },
+    statistics3: function statistics3() {
+      this.lastRequestData = 'bullet3';
+      this.requestData();
+    },
+    statistics4: function statistics4() {
+      this.lastRequestData = 'bullet4';
+      this.requestData();
+    },
+    statistics5: function statistics5() {
+      this.lastRequestData = 'bullet5';
+      this.requestData();
+    },
+    statistics6: function statistics6() {
+      this.lastRequestData = 'bullet6';
+      this.requestData();
     }
   }
 });
@@ -99199,11 +99103,99 @@ var render = function() {
         [
           _c(
             "v-flex",
+            { attrs: { xs2: "" } },
+            [
+              _c(
+                "v-btn",
+                { attrs: { color: "primary" }, on: { click: _vm.statistics1 } },
+                [_vm._v("Bullet 1")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs2: "" } },
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "secondary" },
+                  on: { click: _vm.statistics2 }
+                },
+                [_vm._v("Bullet 2")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs2: "" } },
+            [
+              _c(
+                "v-btn",
+                { attrs: { color: "info" }, on: { click: _vm.statistics3 } },
+                [_vm._v("Bullet 3")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs2: "" } },
+            [
+              _c(
+                "v-btn",
+                { attrs: { color: "success" }, on: { click: _vm.statistics4 } },
+                [_vm._v("Bullet 4")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs2: "" } },
+            [
+              _c(
+                "v-btn",
+                { attrs: { color: "warning" }, on: { click: _vm.statistics5 } },
+                [_vm._v("Bullet 5")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs2: "" } },
+            [
+              _c(
+                "v-btn",
+                { attrs: { color: "danger" }, on: { click: _vm.statistics6 } },
+                [_vm._v("Bullet 6")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "", "align-center": "" } },
+        [
+          _c(
+            "v-flex",
             { attrs: { xs: "" } },
             [
               _c(
                 "v-card",
-                { attrs: { flat: "", height: "500px" } },
+                { attrs: { flat: "", height: "450px" } },
                 [
                   _c(
                     "v-card-text",
@@ -99218,7 +99210,17 @@ var render = function() {
                         : _vm._e()
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  _vm.lastRequestData == "bullet5"
+                    ? _c("v-card-text", { attrs: { "text-justify": "" } }, [
+                        _vm._v(
+                          "\n          Average cars: " +
+                            _vm._s(_vm.average) +
+                            "\n        "
+                        )
+                      ])
+                    : _vm._e()
                 ],
                 1
               )
@@ -99243,746 +99245,18 @@ if (false) {
 }
 
 /***/ }),
-/* 285 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(8)
-/* script */
-var __vue_script__ = __webpack_require__(286)
-/* template */
-var __vue_template__ = __webpack_require__(287)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Statistics2Component.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-05e5e205", Component.options)
-  } else {
-    hotAPI.reload("data-v-05e5e205", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 286 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    DoughnutChart: __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue___default.a
-  },
-  data: function data() {
-    return {
-      loaded: false,
-      loading: false,
-      rawData: '',
-      data: [],
-      labels: [],
-      showError: false,
-      showSettings: false,
-      errorMessage: '',
-      url: ''
-    };
-  },
-  mounted: function mounted() {
-    this.requestData();
-  },
-
-  methods: {
-    requestData: function requestData() {
-      var _this = this;
-
-      this.loading = true;
-      this.loaded = false;
-      this.url = 'http://localhost:8000/api/pollingexecutions/stats/bullet2';
-      axios.get('http://localhost:8000/api/pollingexecutions/stats/bullet2').then(function (response) {
-        if (response.data && response.data.status) {
-          _this.rawData = response.data.data;
-          _this.data = response.data.data.map(function (entry) {
-            return entry.data;
-          });
-          _this.labels = response.data.data.map(function (entry) {
-            return entry.label;
-          });
-          _this.loaded = true;
-          _this.loading = false;
-        }
-      }).catch(function (err) {
-        _this.errorMessage = err;
-        _this.showError = true;
-      });
-    }
-  }
-});
-
-/***/ }),
-/* 287 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-container",
-    [
-      _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "", "align-center": "" } },
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs: "" } },
-            [
-              _c(
-                "v-card",
-                { attrs: { flat: "", height: "500px" } },
-                [
-                  _c(
-                    "v-card-text",
-                    [
-                      _vm.loaded
-                        ? _c("doughnut-chart", {
-                            attrs: {
-                              "chart-data": _vm.data,
-                              "chart-labels": _vm.labels
-                            }
-                          })
-                        : _vm._e()
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-05e5e205", module.exports)
-  }
-}
-
-/***/ }),
-/* 288 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(8)
-/* script */
-var __vue_script__ = __webpack_require__(289)
-/* template */
-var __vue_template__ = __webpack_require__(290)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Statistics3Component.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3078a8b8", Component.options)
-  } else {
-    hotAPI.reload("data-v-3078a8b8", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 289 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    DoughnutChart: __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue___default.a
-  },
-  data: function data() {
-    return {
-      loaded: false,
-      loading: false,
-      rawData: '',
-      data: [],
-      labels: [],
-      showError: false,
-      showSettings: false,
-      errorMessage: '',
-      url: ''
-    };
-  },
-  mounted: function mounted() {
-    this.requestData();
-  },
-
-  methods: {
-    requestData: function requestData() {
-      var _this = this;
-
-      this.loading = true;
-      this.loaded = false;
-      this.url = 'http://localhost:8000/api/pollingexecutions/stats/bullet3';
-      axios.get('http://localhost:8000/api/pollingexecutions/stats/bullet3').then(function (response) {
-        if (response.data && response.data.status) {
-          _this.rawData = response.data.data;
-          _this.data = response.data.data.map(function (entry) {
-            return entry.data;
-          });
-          _this.labels = response.data.data.map(function (entry) {
-            return entry.label;
-          });
-          _this.loaded = true;
-          _this.loading = false;
-        }
-      }).catch(function (err) {
-        _this.errorMessage = err;
-        _this.showError = true;
-      });
-    }
-  }
-});
-
-/***/ }),
-/* 290 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-container",
-    [
-      _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "", "align-center": "" } },
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs: "" } },
-            [
-              _c(
-                "v-card",
-                { attrs: { flat: "", height: "500px" } },
-                [
-                  _c(
-                    "v-card-text",
-                    [
-                      _vm.loaded
-                        ? _c("doughnut-chart", {
-                            attrs: {
-                              "chart-data": _vm.data,
-                              "chart-labels": _vm.labels
-                            }
-                          })
-                        : _vm._e()
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3078a8b8", module.exports)
-  }
-}
-
-/***/ }),
-/* 291 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(8)
-/* script */
-var __vue_script__ = __webpack_require__(292)
-/* template */
-var __vue_template__ = __webpack_require__(293)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Statistics4Component.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6cbd157a", Component.options)
-  } else {
-    hotAPI.reload("data-v-6cbd157a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 292 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    DoughnutChart: __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue___default.a
-  },
-  data: function data() {
-    return {
-      loaded: false,
-      loading: false,
-      rawData: '',
-      data: [],
-      labels: [],
-      showError: false,
-      showSettings: false,
-      errorMessage: '',
-      url: ''
-    };
-  },
-  mounted: function mounted() {
-    this.requestData();
-  },
-
-  methods: {
-    requestData: function requestData() {
-      var _this = this;
-
-      this.loading = true;
-      this.loaded = false;
-      this.url = 'http://localhost:8000/api/pollingexecutions/stats/bullet4';
-      axios.get('http://localhost:8000/api/pollingexecutions/stats/bullet4').then(function (response) {
-        if (response.data && response.data.status) {
-          _this.rawData = response.data.data;
-          _this.data = response.data.data.map(function (entry) {
-            return entry.data;
-          });
-          _this.labels = response.data.data.map(function (entry) {
-            return entry.label;
-          });
-          _this.loaded = true;
-          _this.loading = false;
-        }
-      }).catch(function (err) {
-        _this.errorMessage = err;
-        _this.showError = true;
-      });
-    }
-  }
-});
-
-/***/ }),
-/* 293 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-container",
-    [
-      _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "", "align-center": "" } },
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs: "" } },
-            [
-              _c(
-                "v-card",
-                { attrs: { flat: "", height: "500px" } },
-                [
-                  _c(
-                    "v-card-text",
-                    [
-                      _vm.loaded
-                        ? _c("doughnut-chart", {
-                            attrs: {
-                              "chart-data": _vm.data,
-                              "chart-labels": _vm.labels
-                            }
-                          })
-                        : _vm._e()
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6cbd157a", module.exports)
-  }
-}
-
-/***/ }),
-/* 294 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(8)
-/* script */
-var __vue_script__ = __webpack_require__(295)
-/* template */
-var __vue_template__ = __webpack_require__(296)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Statistics6Component.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e545eefe", Component.options)
-  } else {
-    hotAPI.reload("data-v-e545eefe", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 295 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    DoughnutChart: __WEBPACK_IMPORTED_MODULE_0__data_DoughnutChart_vue___default.a
-  },
-  data: function data() {
-    return {
-      loaded: false,
-      loading: false,
-      rawData: '',
-      data: [],
-      labels: [],
-      showError: false,
-      showSettings: false,
-      errorMessage: '',
-      url: '',
-      average: 0
-    };
-  },
-  mounted: function mounted() {
-    this.requestData();
-  },
-
-  methods: {
-    requestData: function requestData() {
-      var _this = this;
-
-      this.loading = true;
-      this.loaded = false;
-      this.url = 'http://localhost:8000/api/pollingexecutions/stats/bullet6';
-      axios.get('http://localhost:8000/api/pollingexecutions/stats/bullet6').then(function (response) {
-        if (response.data && response.data.status) {
-          _this.rawData = response.data.data;
-          _this.data = response.data.data.map(function (entry) {
-            return entry.data;
-          });
-          _this.labels = response.data.data.map(function (entry) {
-            return entry.label;
-          });
-          _this.loaded = true;
-          _this.loading = false;
-        }
-      }).catch(function (err) {
-        _this.errorMessage = err;
-        _this.showError = true;
-      });
-      axios.get('http://localhost:8000/api/pollingexecutions/stats/bullet5').then(function (response) {
-        if (response.data && response.data.status) {
-          _this.average = response.data.average;
-        }
-      }).catch(function (err) {
-        _this.errorMessage = err;
-        _this.showError = true;
-      });
-    }
-  }
-});
-
-/***/ }),
-/* 296 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-container",
-    [
-      _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "", "align-center": "" } },
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs: "" } },
-            [
-              _c(
-                "v-card",
-                { attrs: { flat: "", height: "500px" } },
-                [
-                  _c(
-                    "v-card-text",
-                    [
-                      _vm.loaded
-                        ? _c("doughnut-chart", {
-                            attrs: {
-                              "chart-data": _vm.data,
-                              "chart-labels": _vm.labels
-                            }
-                          })
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("v-card-text", { attrs: { "text-justify": "" } }, [
-                    _vm._v(
-                      "\n          Average cars: " +
-                        _vm._s(_vm.average) +
-                        "\n        "
-                    )
-                  ])
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-e545eefe", module.exports)
-  }
-}
-
-/***/ }),
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
 /* 297 */
 /***/ (function(module, exports) {
 
