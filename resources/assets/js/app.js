@@ -5,7 +5,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require('./bootstrap')
+
 
 import Vue from 'vue'
 import Vuetify from 'vuetify'
@@ -14,9 +15,13 @@ import MasterPage from './components/MasterPageComponent.vue'
 import Polling from './components/PollingComponent.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueRouter from 'vue-router'
+import router from './routes'
+
 
 Vue.use(Vuetify)
 Vue.use(VueAxios, axios)
+Vue.use(VueRouter)
 Vue.component('master-page', MasterPage)
 Vue.component('polling', Polling)
 
@@ -27,5 +32,6 @@ Vue.component('polling', Polling)
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router: router
 });

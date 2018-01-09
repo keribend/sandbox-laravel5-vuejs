@@ -7,20 +7,24 @@
       app
     >
       <v-list>
-        <v-list-tile @click="">
+        <v-list-tile to="/pollings" @click="">
           <v-list-tile-action>
             <v-icon>dashboard</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Dashboard</v-list-tile-title>
+            <v-list-tile-title>
+              Pollings
+            </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="">
+        <v-list-tile to="/statistics" @click="">
           <v-list-tile-action>
             <v-icon>settings</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Settings</v-list-tile-title>
+            <v-list-tile-title>
+              Statistics
+            </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -32,12 +36,12 @@
     <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center align-center>
-          <polling></polling>
+          <router-view></router-view>
         </v-layout>
       </v-container>
     </v-content>
     <v-footer app fixed>
-      <span>&copy; 2017</span>
+      <span>&copy; 2018</span>
     </v-footer>
   </v-app>
 </template>
@@ -45,7 +49,7 @@
 <script>
   export default {
     data: () => ({
-      drawer: false
+      drawer: true
     })
   }
 </script>

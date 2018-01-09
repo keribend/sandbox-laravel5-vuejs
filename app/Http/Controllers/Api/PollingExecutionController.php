@@ -42,6 +42,12 @@ class PollingExecutionController extends Controller
         return response()->json([ 'status' => true, 'pollingId' => $polling->id ]);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id) {
         $polling = PollingExecution::with('cars')->where('id', '=', $id)->first();
         return response()->json($polling);
