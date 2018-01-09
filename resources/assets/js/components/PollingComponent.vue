@@ -109,7 +109,8 @@
               <v-flex xs10>
                 <v-text-field
                   v-model="newCar"
-                  :rules="[ carNameValidateCheck || !carNameExistCheck ]"
+                  :error-messages="carNameErrorMessages"
+                  @keyup.enter="addCar"
                   label="Inser a BMW model name"
                 ></v-text-field>
               </v-flex>
@@ -119,8 +120,8 @@
             </v-layout>
             <v-layout row wrap align-center>
               <v-flex xs12>
-                <v-list>
-                  <v-list-tile avatar v-for="car in cars" v-bind:key="car.name" @click="">
+                <v-list dense>
+                  <v-list-tile avatar v-for="car in cars" v-bind:key="car.name" @click="">>
                     <v-list-tile-content>
                       <v-list-tile-title v-text="car.name"></v-list-tile-title>
                     </v-list-tile-content>
@@ -154,7 +155,20 @@
         gender: "M",
         cars: [],
         newCar: '',
-        carNamePattern: /^(M?[0-9]{3}(d|i)?)$|(^(X|Z)[0-9]$)/i
+        carNamePattern: /^(M?[0-9]{3}(d|i)?)$|(^(X|Z)[0-9]$)/i,
+        carNameErrorMessages: []
+      }
+    },
+    watch: {
+      newCar: function () {
+        this.carNameErrorMessages = []
+      },
+      age: function () {
+        if (this.age > 100) {
+          this.age = 100
+        } else if (this.age == "") {
+          this.age = 0
+        }
       }
     },
     methods: {
@@ -174,20 +188,35 @@
       },
       carNameValidateCheck: function () {
         if (!this.newCar.match(this.carNamePattern)) {
-          return ['Model name is incorrect.']
+          this.carNameErrorMessages = ['Model name is incorrect.']
+          return false
         }
-        return ['']
+        this.carNameErrorMessages = []
+        return true
       },
       carNameExistCheck: function (newCar) {
-        if (this.cars.some(function (car) { return car.name == newCar })) {
-          return ['Model name already present.']
+        if (this.cars.some(function (car) {
+          // console.log("------> car.name: ["+car.name+"]")
+          // console.log("------> newCar: ["+newCar+"]")
+          // console.log("------> condition-inside: ["+(car.name == newCar)+"]")
+          return car.name == newCar })) {
+          this.carNameErrorMessages = ['Model name already present.']
+          return true
         }
-        return ['']
+        this.carNameErrorMessages = []
+        return false
       },
       addCar: function () {
+        // console.log("this.newCar: ["+this.newCar+"]")
+        // console.log("this.carNamePattern: ["+this.carNamePattern+"]")
+        // console.log("this.carNameValidateCheck(): ["+this.carNameValidateCheck()+"]")
+        // console.log("this.carNameExistCheck(this.newCar): ["+(this.carNameExistCheck(this.newCar))+"]")
+        // console.log("!this.carNameExistCheck(this.newCar): ["+(!this.carNameExistCheck(this.newCar))+"]")
+        // console.log("condition: ["+(this.carNameValidateCheck() && !this.carNameExistCheck(this.newCar))+"]")
         if (this.carNameValidateCheck() && !this.carNameExistCheck(this.newCar)) {
           this.cars.push({name: this.newCar})
           this.newCar = ''
+          this.carNameErrorMessages = []
         }
       }
     }

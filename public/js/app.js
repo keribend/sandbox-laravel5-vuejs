@@ -60923,6 +60923,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -60937,10 +60938,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       gender: "M",
       cars: [],
       newCar: '',
-      carNamePattern: /^(M?[0-9]{3}(d|i)?)$|(^(X|Z)[0-9]$)/i
+      carNamePattern: /^(M?[0-9]{3}(d|i)?)$|(^(X|Z)[0-9]$)/i,
+      carNameErrorMessages: []
     };
   },
 
+  watch: {
+    newCar: function newCar() {
+      this.carNameErrorMessages = [];
+    },
+    age: function age() {
+      if (this.age > 100) {
+        this.age = 100;
+      } else if (this.age == "") {
+        this.age = 0;
+      }
+    }
+  },
   methods: {
     checkStep1: function checkStep1() {
       if (this.age < 18) {
@@ -60958,22 +60972,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     carNameValidateCheck: function carNameValidateCheck() {
       if (!this.newCar.match(this.carNamePattern)) {
-        return ['Model name is incorrect.'];
+        this.carNameErrorMessages = ['Model name is incorrect.'];
+        return false;
       }
-      return [''];
+      this.carNameErrorMessages = [];
+      return true;
     },
     carNameExistCheck: function carNameExistCheck(newCar) {
       if (this.cars.some(function (car) {
+        // console.log("------> car.name: ["+car.name+"]")
+        // console.log("------> newCar: ["+newCar+"]")
+        // console.log("------> condition-inside: ["+(car.name == newCar)+"]")
         return car.name == newCar;
       })) {
-        return ['Model name already present.'];
+        this.carNameErrorMessages = ['Model name already present.'];
+        return true;
       }
-      return [''];
+      this.carNameErrorMessages = [];
+      return false;
     },
     addCar: function addCar() {
+      // console.log("this.newCar: ["+this.newCar+"]")
+      // console.log("this.carNamePattern: ["+this.carNamePattern+"]")
+      // console.log("this.carNameValidateCheck(): ["+this.carNameValidateCheck()+"]")
+      // console.log("this.carNameExistCheck(this.newCar): ["+(this.carNameExistCheck(this.newCar))+"]")
+      // console.log("!this.carNameExistCheck(this.newCar): ["+(!this.carNameExistCheck(this.newCar))+"]")
+      // console.log("condition: ["+(this.carNameValidateCheck() && !this.carNameExistCheck(this.newCar))+"]")
       if (this.carNameValidateCheck() && !this.carNameExistCheck(this.newCar)) {
         this.cars.push({ name: this.newCar });
         this.newCar = '';
+        this.carNameErrorMessages = [];
       }
     }
   }
@@ -61398,11 +61426,24 @@ var render = function() {
                             [
                               _c("v-text-field", {
                                 attrs: {
-                                  rules: [
-                                    _vm.carNameValidateCheck ||
-                                      !_vm.carNameExistCheck
-                                  ],
+                                  "error-messages": _vm.carNameErrorMessages,
                                   label: "Inser a BMW model name"
+                                },
+                                on: {
+                                  keyup: function($event) {
+                                    if (
+                                      !("button" in $event) &&
+                                      _vm._k(
+                                        $event.keyCode,
+                                        "enter",
+                                        13,
+                                        $event.key
+                                      )
+                                    ) {
+                                      return null
+                                    }
+                                    _vm.addCar($event)
+                                  }
                                 },
                                 model: {
                                   value: _vm.newCar,
@@ -61445,14 +61486,11 @@ var render = function() {
                             [
                               _c(
                                 "v-list",
+                                { attrs: { dense: "" } },
                                 _vm._l(_vm.cars, function(car) {
                                   return _c(
                                     "v-list-tile",
-                                    {
-                                      key: car.name,
-                                      attrs: { avatar: "" },
-                                      on: { click: function($event) {} }
-                                    },
+                                    { key: car.name, attrs: { avatar: "" } },
                                     [
                                       _c(
                                         "v-list-tile-content",
@@ -61460,7 +61498,8 @@ var render = function() {
                                           _c("v-list-tile-title", {
                                             domProps: {
                                               textContent: _vm._s(car.name)
-                                            }
+                                            },
+                                            on: { click: function($event) {} }
                                           })
                                         ],
                                         1
