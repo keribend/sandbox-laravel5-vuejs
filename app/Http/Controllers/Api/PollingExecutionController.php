@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\PollingExecution;
 use App\Car;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
