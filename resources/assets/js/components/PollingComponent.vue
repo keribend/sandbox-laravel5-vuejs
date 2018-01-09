@@ -9,7 +9,7 @@
       <v-divider></v-divider>
       <v-stepper-step step="4" :complete="step > 4">Experiences</v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step step="5" :complete="step > 5">Summary</v-stepper-step>
+      <v-stepper-step step="5">Summary</v-stepper-step>
     </v-stepper-header>
     <v-stepper-items>
       <v-stepper-content step="1">
@@ -300,7 +300,6 @@
             this.snackbar.color = "success"
             this.snackbar.text = "Polling id ["+response.data.pollingId+"] successfully submitted!"
             this.disableSend = true
-            this.step += 1
           }
         })
         .catch(e => {
