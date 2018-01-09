@@ -10,8 +10,12 @@ let routes = [
     component: require('./components/PollingComponent.vue')
   },
   {
-    path: '/statistics',
-    component: require('./components/StatisticsComponent.vue')
+    path: '/statistics1',
+    component: require('./components/Statistics1Component.vue')
+  },
+  {
+    path: '/statistics2',
+    component: require('./components/Statistics2Component.vue')
   },
   {
     path: '*',

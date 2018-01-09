@@ -59,24 +59,42 @@ class PollingExecutionController extends Controller
         $kids = $pollings->where('age', '<', 18);
         $adults = $pollings->where('age', '>=', 18);
 
-        $json_labels = json_encode(['bullet1']);
-        $json_data = json_encode([
+        $json_data = [
             [
                 "label" => "Kids",
-                "backgroundColor" => "#3D5B96",
                 "data" => [$kids->count()]
             ],
             [
                 "label" => "Adults",
-                "backgroundColor" => "#1EFFFF",
                 "data" => [$adults->count()]
             ],
-        ]);
+        ];
         
         return response()->json([
             'status' => true,
             'data' => $json_data,
-            'labels' => $json_labels
+        ]);
+    }
+
+    public function bullet2() {
+        $pollings = PollingExecution::all();
+
+        $licensed = $pollings->where('drivingLicenseOwned', true);
+
+        $json_data = [
+            [
+                "label" => "Licensed",
+                "data" => [$licensed->count()]
+            ],
+            [
+                "label" => "Not-eligible",
+                "data" => [$pollings->count() - $licensed->count()]
+            ],
+        ];
+        
+        return response()->json([
+            'status' => true,
+            'data' => $json_data,
         ]);
     }
 }

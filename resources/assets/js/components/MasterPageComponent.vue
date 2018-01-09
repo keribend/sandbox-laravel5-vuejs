@@ -17,13 +17,23 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile to="/statistics" @click="">
+        <v-list-tile to="/statistics1" @click="">
           <v-list-tile-action>
             <v-icon>show_chart</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>
-              Statistics
+              Statistics 1
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile to="/statistics2" @click="">
+          <v-list-tile-action>
+            <v-icon>show_chart</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              Statistics 2
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>

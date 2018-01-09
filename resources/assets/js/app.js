@@ -13,7 +13,7 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import MasterPage from './components/MasterPageComponent.vue'
 import Polling from './components/PollingComponent.vue'
-import Statistics from './components/StatisticsComponent.vue'
+import Statistics1 from './components/Statistics1Component.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueRouter from 'vue-router'
@@ -24,7 +24,7 @@ Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 Vue.component('master-page', MasterPage)
 Vue.component('polling', Polling)
-Vue.component('statistics', Statistics)
+Vue.component('Statistics1', Statistics1)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

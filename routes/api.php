@@ -17,6 +17,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('pollingexecutions/stats/bullet1', 'PollingExecutionController@bullet1');
+Route::group([ 'prefix' => 'pollingexecutions' ], function() {
+	Route::group([ 'prefix' => 'stats' ], function() {
+		Route::get('bullet1', 'PollingExecutionController@bullet1');
+		Route::get('bullet2', 'PollingExecutionController@bullet2');
+		Route::get('bullet3', 'PollingExecutionController@bullet3');
+		Route::get('bullet4', 'PollingExecutionController@bullet4');
+	});
+});
+
 Route::resource('pollingexecutions', 'PollingExecutionController');
 Route::resource('cars', 'CarController');
