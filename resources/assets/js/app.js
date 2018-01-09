@@ -19,7 +19,6 @@ import VueAxios from 'vue-axios'
 import VueRouter from 'vue-router'
 import router from './routes'
 
-
 Vue.use(Vuetify)
 Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
