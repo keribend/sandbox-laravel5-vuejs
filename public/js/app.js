@@ -64660,6 +64660,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -64679,77 +64685,121 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-tabs",
-    {
-      model: {
-        value: _vm.active,
-        callback: function($$v) {
-          _vm.active = $$v
-        },
-        expression: "active"
-      }
-    },
+    "v-container",
     [
       _c(
-        "v-tabs-bar",
-        { staticClass: "blue", attrs: { dark: "" } },
-        [
-          _c("v-tabs-item", { attrs: { ripple: "", href: "#tab-1" } }, [
-            _vm._v("Item 1")
-          ]),
-          _vm._v(" "),
-          _c("v-tabs-item", { attrs: { ripple: "", href: "#tab-2" } }, [
-            _vm._v("Item 2")
-          ]),
-          _vm._v(" "),
-          _c("v-tabs-item", { attrs: { ripple: "", href: "#tab-3" } }, [
-            _vm._v("Item 3")
-          ]),
-          _vm._v(" "),
-          _c("v-tabs-slider", { attrs: { color: "white" } })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-tabs-items",
+        "v-layout",
+        { attrs: { row: "", wrap: "", "align-center": "" } },
         [
           _c(
-            "v-tabs-content",
-            { attrs: { id: "tab-1" } },
+            "v-flex",
+            { attrs: { xs: "" } },
             [
               _c(
-                "v-card",
-                { attrs: { flat: "" } },
-                [_c("v-card-text", [_vm._v(_vm._s(_vm.text))])],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-tabs-content",
-            { attrs: { id: "tab-2" } },
-            [
-              _c(
-                "v-card",
-                { attrs: { flat: "" } },
-                [_c("v-card-text", [_vm._v(_vm._s(_vm.text))])],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-tabs-content",
-            { attrs: { id: "tab-3" } },
-            [
-              _c(
-                "v-card",
-                { attrs: { flat: "" } },
-                [_c("v-card-text", [_vm._v(_vm._s(_vm.text))])],
+                "v-tabs",
+                {
+                  model: {
+                    value: _vm.active,
+                    callback: function($$v) {
+                      _vm.active = $$v
+                    },
+                    expression: "active"
+                  }
+                },
+                [
+                  _c(
+                    "v-tabs-bar",
+                    { staticClass: "blue", attrs: { dark: "" } },
+                    [
+                      _c(
+                        "v-tabs-item",
+                        { attrs: { ripple: "", href: "#tab-1" } },
+                        [_vm._v("Item 1")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-tabs-item",
+                        { attrs: { ripple: "", href: "#tab-2" } },
+                        [_vm._v("Item 2")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-tabs-item",
+                        { attrs: { ripple: "", href: "#tab-3" } },
+                        [_vm._v("Item 3")]
+                      ),
+                      _vm._v(" "),
+                      _c("v-tabs-slider", { attrs: { color: "white" } })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-tabs-items",
+                    [
+                      _c(
+                        "v-tabs-content",
+                        { attrs: { id: "tab-1" } },
+                        [
+                          _c(
+                            "v-card",
+                            {
+                              attrs: {
+                                flat: "",
+                                width: "500px",
+                                height: "500px"
+                              }
+                            },
+                            [_c("v-card-text", [_vm._v(_vm._s(_vm.text))])],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-tabs-content",
+                        { attrs: { id: "tab-2" } },
+                        [
+                          _c(
+                            "v-card",
+                            {
+                              attrs: {
+                                flat: "",
+                                width: "500px",
+                                height: "500px"
+                              }
+                            },
+                            [_c("v-card-text", [_vm._v(_vm._s(_vm.text))])],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-tabs-content",
+                        { attrs: { id: "tab-3" } },
+                        [
+                          _c(
+                            "v-card",
+                            {
+                              attrs: {
+                                flat: "",
+                                width: "500px",
+                                height: "500px"
+                              }
+                            },
+                            [_c("v-card-text", [_vm._v(_vm._s(_vm.text))])],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
                 1
               )
             ],

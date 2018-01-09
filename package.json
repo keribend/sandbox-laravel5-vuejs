@@ -19,7 +19,9 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "chartjs": "^0.3.24",
         "vue-axios": "^2.0.2",
+        "vue-chartjs": "^3.0.2",
         "vue-router": "^3.0.1",
         "vuetify": "^0.17.6"
     }
